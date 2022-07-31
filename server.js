@@ -39,7 +39,8 @@ serve(async (req) => {
       }
 
     return serveDir(req, {
-        fsRoot: "public",
+      fsRoot: "deno_shiritori/public",
+      // push時に変更しないとdeployweb上でエラー
         urlRoot: "",
         showDirListing: true,
         enableCors: true,
