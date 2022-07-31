@@ -16,10 +16,13 @@
     window.onload = async (event) => { 
         const response = await fetch("/shiritori");
         const previousWord = await response.text();
-    };
-
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語: ${previousWord}`;
+        // alert(previousWord);
+    };
+    
+        // const para = document.querySelector("#previousWord");
+        // para.innerText = `前の単語: ${previousWord}`;
 
 
         document.querySelector("#nextWordSendButton").onclick = async (event) => {
