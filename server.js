@@ -31,7 +31,7 @@ serve(async (req) => {
       }
 
     return serveDir(req, {
-        fsRoot: "deno_shiritori/public",
+        fsRoot: "public",
         urlRoot: "",
         showDirListing: true,
         enableCors: true,
