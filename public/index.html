@@ -13,12 +13,15 @@
   <button id ="nextWordSendButton">送信</button>
 
   <script type="module">
+        // let WordList = [];
+
     window.onload = async (event) => { 
         const response = await fetch("/shiritori");
         const previousWord = await response.text();
         const para = document.querySelector("#previousWord");
         para.innerText = `前の単語: ${previousWord}`;
-        // alert(previousWord);
+        // WordList.push(previousWord);
+        // console.log(WordList);
     };
     
         // const para = document.querySelector("#previousWord");
@@ -41,6 +44,8 @@ return;
 const previousWord = await response.text();
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord}`;
+// WordList.push(previousWord);
+// console.log(WordList)
 
 };
     </script>
