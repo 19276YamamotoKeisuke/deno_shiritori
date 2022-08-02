@@ -3,14 +3,59 @@
 
 <head>
   <meta charset="utf-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+  <title>しりとりwebサイト</title>
 </head>
 
 <body>
-  <h1>しりとりdeno_shiritori_file</h1>
+  <scirpt src="../server.js"></scirpt>
+  <div id="atAll"><h1>しりとりゲーム</h1>
+
+    <div id="app">
+      <table border="1" class="table" id="list">
+        <th>既に使用している単語</th>
+        <tr v-for="word in words_history" class="table" id="list_tr">
+          <td>
+      {{ word }}
+          </td>
+        </tr>
+      </table>
+      <!-- <h2>{{ product }}</h2> -->
+    </div>
+
+    <section>
   <p id="previousWord"></p>
-  <input id="nextWordInput" type="text"/>
-  <button id ="nextWordSendButton">送信</button>
+  <!-- <div id="pre">{{ preword }}</div> -->
+  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語を入力してください" aria-label="default input example"/>
+  <button id ="nextWordSendButton" class="btn btn-secondary">送信</button>
+  <br>
+  <br>
+  <button id ="resetButton" class="btn btn-secondary">リセットしてリスタート</button></div>
+    </section>
+
+    <!-- test -->
+    <script src="vue.js"></script>
+    <script>
+      // const saveword = _save();
+      const app = new Vue({
+        el: '#app',
+        data:{
+          words_history: [
+        ]
+        }
+      })
+      // app.words_history = saveword;
+      // test
+      // const pre = new Vue({
+      //   el: '#pre',
+      //   data:{
+      //     preword: 'syokiti'
+      //   }
+      // })
+    </script> 
 
   <script type="module">
         // let WordList = [];
@@ -34,7 +79,11 @@
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ nextWord })
+
+        
 });
+
+
 
 if (response.status / 100 !== 2) {
 alert(await response.text());
@@ -42,13 +91,44 @@ return;
 }
 
 const previousWord = await response.text();
+app.words_history.push(nextWord);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord}`;
+// pre.preword = `${previousWord}`;
 // WordList.push(previousWord);
 // console.log(WordList)
 
 };
+
+        document.querySelector("#resetButton").onclick = async (event) => {
+            const nextWord = "reset";
+            document.querySelector("#nextWordInput").value;
+            const response = await fetch("/shiritori", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ nextWord })
+
+        
+});
+
+
+
+if (response.status / 100 !== 2) {
+alert(await response.text());
+return;
+}
+
+const previousWord = await response.text();
+app.words_history.splice(0,app.words_history.length);
+const para = document.querySelector("#previousWord");
+para.innerText = `前の単語：${previousWord}`;
+// console.log(WordList)
+
+};
+
+
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

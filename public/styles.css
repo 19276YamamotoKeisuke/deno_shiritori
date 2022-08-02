@@ -1,3 +1,38 @@
+h1 {
+    font-family: "Nico Moji";
+    font-size: 5vw;
+    margin: 8vw;
+}
+td {
+    font-family: "Nico Moji";
+}
 body {
-    background: skyblue;
+    background: rgb(246, 243, 231);
+}
+#list{
+    background-color: rgb(246, 243, 200);
+}
+#list_tr {
+    background-color: rgb(255, 255, 255);
+}
+div {
+    margin-left: 10vw;
+    margin-right: 10vw;
+    text-align: center;
+}
+table {
+    margin: 10vw;
+    text-align: center;
+}
+section {
+    border-width: 2px;
+    border-color: gray;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 8vw;
+    margin-bottom: 8vw;
+  }
+#list{
+    margin: auto;
+    margin-bottom: 5vw;
 }
