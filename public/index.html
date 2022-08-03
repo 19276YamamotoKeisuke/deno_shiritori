@@ -19,7 +19,7 @@
         <th>既に使用している単語</th>
         <tr v-for="word in words_history" class="table" id="list_tr">
           <td>
-      {{ word }}
+            {{ word }}
           </td>
         </tr>
       </table>
@@ -39,6 +39,7 @@
     <!-- test -->
     <script src="vue.js"></script>
     <script>
+      // var test=[];
       // const saveword = _save();
       const app = new Vue({
         el: '#app',
@@ -63,11 +64,21 @@
     window.onload = async (event) => { 
         const response = await fetch("/shiritori");
         const previousWord = await response.text();
+        const previousWord2 = previousWord.split(',');
         const para = document.querySelector("#previousWord");
-        para.innerText = `前の単語: ${previousWord}`;
+        para.innerText = `前の単語: ${previousWord2[previousWord2.length - 1]}`;
+        app.words_history = previousWord2;
+        // .push(previousWord);
+        
+        // app.words_history.push(localStorage.getItem('test'));
         // WordList.push(previousWord);
         // console.log(WordList);
     };
+    // window.onload = async (event) => {
+    //   const response = await fetch("/shiritori");
+    //   const WordList = await response.text();
+    //   console.log(WordList);
+    // }
     
         // const para = document.querySelector("#previousWord");
         // para.innerText = `前の単語: ${previousWord}`;
@@ -78,12 +89,8 @@
             const response = await fetch("/shiritori", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nextWord })
-
-        
+                body: JSON.stringify({ nextWord })        
 });
-
-
 
 if (response.status / 100 !== 2) {
 alert(await response.text());
@@ -91,9 +98,14 @@ return;
 }
 
 const previousWord = await response.text();
+console.log(previousWord);
+const previousWord2 = previousWord.split(',');
+// temp = previousWord2
 app.words_history.push(nextWord);
 const para = document.querySelector("#previousWord");
-para.innerText = `前の単語：${previousWord}`;
+para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
+// test.push(nextWord);
+// localStorage.setItem('test',test);
 // pre.preword = `${previousWord}`;
 // WordList.push(previousWord);
 // console.log(WordList)
@@ -104,8 +116,8 @@ para.innerText = `前の単語：${previousWord}`;
             const nextWord = "reset";
             document.querySelector("#nextWordInput").value;
             const response = await fetch("/shiritori", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+                method: "POST", //メソッド(GETとかPOST)
+                headers: { "Content-Type": "application/json" }, //データの形式
                 body: JSON.stringify({ nextWord })
 
         
@@ -120,8 +132,10 @@ return;
 
 const previousWord = await response.text();
 app.words_history.splice(0,app.words_history.length);
+app.words_history.push(previousWord[0]);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord}`;
+// localStorage.clear()
 // console.log(WordList)
 
 };
