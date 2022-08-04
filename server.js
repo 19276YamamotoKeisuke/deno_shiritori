@@ -34,6 +34,11 @@ serve(
 
         const requestJson = await req.json();
         let nextWord = requestJson.nextWord;
+        
+      if (nextWord.charAt(nextWord.length - 1) === "ー") {
+        nextWord = nextWord.slice(0, -1);
+        console.log(nextWord);
+      }
 
         if (nextWord.length > 0 && previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) && nextWord != "reset")
         {
@@ -49,6 +54,11 @@ serve(
         {
           return new Response("単語の末尾が「ん」になっています。", { status: 400 });
         }
+        // if (nextWord.charAt(nextWord.length - 1) === "ー")
+        // {
+        //   nextWord = nextWord.slice(0, -1);
+        //   console.log(nextWord);
+        // }
         else if (nextWord.match(/^[ぁ-んー　]+$/))
         {
           console.log('ひらがな確認');

@@ -11,10 +11,11 @@
 </head>
 
 <body>
+  <section>
   <scirpt src="../server.js"></scirpt>
-  <div id="atAll"><h1>しりとりゲーム</h1>
+  <div class="split">
 
-    <div id="app">
+    <div id="app" class="item left">
       <table border="1" class="table" id="list">
         <th>既に使用している単語</th>
         <tr v-for="word in words_history" class="table" id="list_tr">
@@ -26,15 +27,18 @@
       <!-- <h2>{{ product }}</h2> -->
     </div>
 
-    <section>
+    <div class="item right">
+      <h1>しりとりゲーム</h1>
+    <!-- <section> -->
   <p id="previousWord"></p>
   <!-- <div id="pre">{{ preword }}</div> -->
-  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語を入力してください" aria-label="default input example"/>
+  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語" aria-label="default input example"/>
+  <br>
   <button id ="nextWordSendButton" class="btn btn-secondary">送信</button>
-  <br>
-  <br>
-  <button id ="resetButton" class="btn btn-secondary">リセットしてリスタート</button></div>
+  <!-- <br> -->
+  <button id ="resetButton" class="btn btn-secondary">リスタート</button></div>
     </section>
+    </div>
 
     <!-- test -->
     <script src="vue.js"></script>
@@ -101,7 +105,9 @@ const previousWord = await response.text();
 console.log(previousWord);
 const previousWord2 = previousWord.split(',');
 // temp = previousWord2
-app.words_history.push(nextWord);
+app.words_history.push(previousWord2[previousWord2.length - 1]
+  // nextWord
+);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
 // test.push(nextWord);
