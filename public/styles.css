@@ -73,6 +73,6 @@ section {
 }
 button{
     margin: 20px;
-    /* margin-left: 20px; */
     width: 25vw;
+    height: 5vw;
 }
