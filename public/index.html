@@ -11,34 +11,40 @@
 </head>
 
 <body>
+  <section>
   <scirpt src="../server.js"></scirpt>
-  <div id="atAll"><h1>しりとりゲーム</h1>
+  <div class="split">
 
-    <div id="app">
+    <div id="app" class="item left">
       <table border="1" class="table" id="list">
         <th>既に使用している単語</th>
         <tr v-for="word in words_history" class="table" id="list_tr">
           <td>
-      {{ word }}
+            {{ word }}
           </td>
         </tr>
       </table>
       <!-- <h2>{{ product }}</h2> -->
     </div>
 
-    <section>
+    <div class="item right">
+      <h1>しりとりゲーム</h1>
+    <!-- <section> -->
   <p id="previousWord"></p>
   <!-- <div id="pre">{{ preword }}</div> -->
-  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語を入力してください" aria-label="default input example"/>
+  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語" aria-label="default input example"/>
+  <br>
   <button id ="nextWordSendButton" class="btn btn-secondary">送信</button>
-  <br>
-  <br>
-  <button id ="resetButton" class="btn btn-secondary">リセットしてリスタート</button></div>
+  <!-- <br> -->
+  <button id ="resetButton" class="btn btn-secondary">リスタート</button></div>
     </section>
+    </div>
 
     <!-- test -->
     <script src="vue.js"></script>
     <script>
+
+      // var test=[];
       // const saveword = _save();
       const app = new Vue({
         el: '#app',
@@ -63,27 +69,28 @@
     window.onload = async (event) => { 
         const response = await fetch("/shiritori");
         const previousWord = await response.text();
+        const previousWord2 = previousWord.split(',');
         const para = document.querySelector("#previousWord");
-        para.innerText = `前の単語: ${previousWord}`;
-        // WordList.push(previousWord);
+        para.innerText = `前の単語: ${previousWord2[previousWord2.length - 1]}`;
+        app.words_history = previousWord2;
+
         // console.log(WordList);
     };
-    
-        // const para = document.querySelector("#previousWord");
-        // para.innerText = `前の単語: ${previousWord}`;
-
 
         document.querySelector("#nextWordSendButton").onclick = async (event) => {
-            const nextWord = document.querySelector("#nextWordInput").value;
+          let nextWord = document.querySelector("#nextWordInput").value;
+          if (nextWord.charAt(nextWord.length - 1) === "ん"){
+              nextWord = 'reset';
+              alert('単語の末尾が「ん」になっています。ゲームを終了します。');
+              app.words_history.splice(0,app.words_history.length);
+            }
+            // const nextWord = document.querySelector("#nextWordInput").value;
+            document.querySelector("#nextWordInput").value = '';
             const response = await fetch("/shiritori", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ nextWord })
-
-        
+                body: JSON.stringify({ nextWord })        
 });
-
-
 
 if (response.status / 100 !== 2) {
 alert(await response.text());
@@ -91,9 +98,13 @@ return;
 }
 
 const previousWord = await response.text();
-app.words_history.push(nextWord);
+console.log(previousWord);
+const previousWord2 = previousWord.split(',');
+app.words_history.push(previousWord2[previousWord2.length - 1]);
 const para = document.querySelector("#previousWord");
-para.innerText = `前の単語：${previousWord}`;
+para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
+// test.push(nextWord);
+// localStorage.setItem('test',test);
 // pre.preword = `${previousWord}`;
 // WordList.push(previousWord);
 // console.log(WordList)
@@ -102,10 +113,10 @@ para.innerText = `前の単語：${previousWord}`;
 
         document.querySelector("#resetButton").onclick = async (event) => {
             const nextWord = "reset";
-            document.querySelector("#nextWordInput").value;
+            document.querySelector("#nextWordInput").value = '';
             const response = await fetch("/shiritori", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
+                method: "POST", //メソッド(GETとかPOST)
+                headers: { "Content-Type": "application/json" }, //データの形式
                 body: JSON.stringify({ nextWord })
 
         
@@ -120,13 +131,13 @@ return;
 
 const previousWord = await response.text();
 app.words_history.splice(0,app.words_history.length);
+app.words_history.push(previousWord[0]);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord}`;
+// localStorage.clear()
 // console.log(WordList)
 
 };
-
-
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

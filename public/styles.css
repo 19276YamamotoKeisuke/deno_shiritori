@@ -1,13 +1,32 @@
 h1 {
     font-family: "Nico Moji";
     font-size: 5vw;
-    margin: 8vw;
+    margin: 6vw;
+    text-align: center;
 }
 td {
     font-family: "Nico Moji";
 }
+.split {
+    display: table;
+    width: 100%;
+}
+.item {
+    display: table-cell;
+    padding: 40px;
+    /* width: 50%; */
+}
+.left{
+    position: relative;
+    /* background-image:url(cool-background.png); */
+    width: 40%;
+}
+
 body {
-    background: rgb(246, 243, 231);
+    /* background: rgb(246, 243, 231); */
+    background-image:url(cool-background.png);
+    background-size: cover;
+    background-attachment: fixed;
 }
 #list{
     background-color: rgb(246, 243, 200);
@@ -16,8 +35,8 @@ body {
     background-color: rgb(255, 255, 255);
 }
 div {
-    margin-left: 10vw;
-    margin-right: 10vw;
+    /* margin-left: 10vw; */
+    /* margin-right: 10vw; */
     text-align: center;
 }
 table {
@@ -25,12 +44,14 @@ table {
     text-align: center;
 }
 section {
-    border-width: 2px;
+    background: rgb(246, 243, 231);
+    border-width: 1px;
     border-color: gray;
     border-style: solid;
     border-radius: 8px;
-    padding: 8vw;
-    margin-bottom: 8vw;
+    padding: 10px;
+    /* 8vw; */
+    margin: 10vw;
   }
 #list{
     margin: auto;
