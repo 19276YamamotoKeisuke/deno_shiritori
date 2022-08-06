@@ -87,7 +87,7 @@ serve(
       }
 
     return serveDir(req, {
-      fsRoot: "../public",
+      fsRoot: "public",
       // push時に変更しないとdeployweb上でエラー
         urlRoot: "",
         showDirListing: true,
