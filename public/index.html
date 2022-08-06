@@ -15,7 +15,18 @@
   <scirpt src="../server.js"></scirpt>
   <div class="split">
 
-    <div id="app" class="item left">
+    <div class="item left">
+      <h1>しりとりゲーム</h1>
+    <!-- <section> -->
+  <p id="previousWord"></p>
+  <!-- <div id="pre">{{ preword }}</div> -->
+  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語" aria-label="default input example"/>
+  <br>
+  <button id ="nextWordSendButton" class="btn btn-secondary ">送信</button>
+  <!-- <br> -->
+  <button id ="resetButton" class="btn btn-secondary">リスタート</button></div>
+
+    <div id="app" class="item right">
       <table border="1" class="table" id="list">
         <th>既に使用している単語</th>
         <tr v-for="word in words_history" class="table" id="list_tr">
@@ -27,16 +38,7 @@
       <!-- <h2>{{ product }}</h2> -->
     </div>
 
-    <div class="item right">
-      <h1>しりとりゲーム</h1>
-    <!-- <section> -->
-  <p id="previousWord"></p>
-  <!-- <div id="pre">{{ preword }}</div> -->
-  <input id="nextWordInput" class="form-control" type="text" placeholder="次の単語" aria-label="default input example"/>
-  <br>
-  <button id ="nextWordSendButton" class="btn btn-secondary">送信</button>
-  <!-- <br> -->
-  <button id ="resetButton" class="btn btn-secondary">リスタート</button></div>
+    
     </section>
     </div>
 

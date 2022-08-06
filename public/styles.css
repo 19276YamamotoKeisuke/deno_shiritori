@@ -19,7 +19,7 @@ td {
 .left{
     position: relative;
     /* background-image:url(cool-background.png); */
-    width: 40%;
+    width: 60%;
 }
 
 @media screen and (max-width:1024px) {
