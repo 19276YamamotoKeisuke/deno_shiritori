@@ -71,3 +71,8 @@ section {
     margin: auto;
     margin-bottom: 5vw;
 }
+button{
+    margin: 20px;
+    /* margin-left: 20px; */
+    width: 25vw;
+}
