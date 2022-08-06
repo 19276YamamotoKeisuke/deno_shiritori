@@ -94,11 +94,3 @@ serve(
         enableCors: true,
       });
   });
-
-// savelist(req) => {
-//   return new Response(WordList);
-// };
-
-// function _save() {
-//   return WordList;
-// }

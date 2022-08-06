@@ -78,7 +78,13 @@
     };
 
         document.querySelector("#nextWordSendButton").onclick = async (event) => {
-            const nextWord = document.querySelector("#nextWordInput").value;
+          let nextWord = document.querySelector("#nextWordInput").value;
+          if (nextWord.charAt(nextWord.length - 1) === "ん"){
+              nextWord = 'reset';
+              alert('単語の末尾が「ん」になっています。ゲームを終了します。');
+              app.words_history.splice(0,app.words_history.length);
+            }
+            // const nextWord = document.querySelector("#nextWordInput").value;
             document.querySelector("#nextWordInput").value = '';
             const response = await fetch("/shiritori", {
                 method: "POST",
@@ -94,10 +100,7 @@ return;
 const previousWord = await response.text();
 console.log(previousWord);
 const previousWord2 = previousWord.split(',');
-// temp = previousWord2
-app.words_history.push(previousWord2[previousWord2.length - 1]
-  // nextWord
-);
+app.words_history.push(previousWord2[previousWord2.length - 1]);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
 // test.push(nextWord);
@@ -110,7 +113,7 @@ para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
 
         document.querySelector("#resetButton").onclick = async (event) => {
             const nextWord = "reset";
-            document.querySelector("#nextWordInput").value;
+            document.querySelector("#nextWordInput").value = '';
             const response = await fetch("/shiritori", {
                 method: "POST", //メソッド(GETとかPOST)
                 headers: { "Content-Type": "application/json" }, //データの形式

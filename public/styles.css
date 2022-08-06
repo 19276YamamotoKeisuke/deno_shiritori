@@ -57,16 +57,3 @@ section {
     margin: auto;
     margin-bottom: 5vw;
 }
-@media screen and (max-width:1024px) {
-    .split{
-        display: block;
-    }
-    .split-item{
-        display: block;
-        width: auto;
-    }
-    /* .split-left__inner{
-        position: inherit;
-        width: auto;
-    } */
-}
