@@ -14,7 +14,7 @@ console.log("Listening on http://localhost:8000");
 serve(
   async (req) => {
     const pathname = new URL(req.url).pathname;
-    console.log(pathname);
+    // console.log(pathname);
 
     if (req.method === "GET" && pathname === "/shiritori") {
       return new Response(WordList
@@ -109,7 +109,7 @@ serve(
       
       WordList.push(nextWord);
       console.log(WordList);
-        previousWord = nextWord;
+      previousWord = nextWord;
       return new Response(WordList
       // [WordList.length - 1]
         // previousWord
