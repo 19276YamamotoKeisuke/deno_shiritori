@@ -79,7 +79,7 @@
         app.words_history = previousWord2;
 
         // console.log(WordList);
-    }, 3000);
+    }, 5000);
 
     window.onload = async (event) => { 
         const response = await fetch("/shiritori");
@@ -119,11 +119,6 @@ const previousWord2 = previousWord.split(',');
 app.words_history.push(previousWord2[previousWord2.length - 1]);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord2[previousWord2.length - 1]}`;
-// test.push(nextWord);
-// localStorage.setItem('test',test);
-// pre.preword = `${previousWord}`;
-// WordList.push(previousWord);
-// console.log(WordList)
 
 };
 
