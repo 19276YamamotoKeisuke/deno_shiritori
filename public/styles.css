@@ -22,6 +22,20 @@ td {
     width: 40%;
 }
 
+@media screen and (max-width:1024px) {
+    .split{
+        display: block;
+    }
+    .item{
+        display: block;
+        width: auto;
+    }
+    /* .split-left__inner{
+        position: inherit;
+        width: auto;
+    } */
+}
+
 body {
     /* background: rgb(246, 243, 231); */
     background-image:url(cool-background.png);

@@ -4,8 +4,6 @@ import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
 const _chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ';//'を','ん' を除く
 let previousWord = [];
-// let _counter = 0;
-// let i = 0;
 previousWord += _chars.charAt(Math.floor(Math.random() * _chars.length));
 let WordList = [];
 WordList.push(previousWord);
@@ -18,18 +16,10 @@ serve(
     console.log(pathname);
 
     if (req.method === "GET" && pathname === "/shiritori") {
-      // _counter += 1;
       return new Response(WordList
-      // [WordList.length - 1]
-        // previousWord
       );
         
     }
-    // else if (req.method === "GET" && _counter == 1) {
-    //   _counter = 0;
-    //   return new Response(WordList);
-    // }
-    
     if (req.method === "POST" && pathname === "/shiritori") {
 
         const requestJson = await req.json();
@@ -50,14 +40,9 @@ serve(
           return new Response("その単語はすでに使われています。", { status: 400 });
         }
         
-        else if (nextWord.charAt(nextWord.length - 1) === "ん")
-        {
-          return new Response("単語の末尾が「ん」になっています。", { status: 400 });
-        }
-        // if (nextWord.charAt(nextWord.length - 1) === "ー")
+        // else if (nextWord.charAt(nextWord.length - 1) === "ん")
         // {
-        //   nextWord = nextWord.slice(0, -1);
-        //   console.log(nextWord);
+        //   return new Response("単語の末尾が「ん」になっています。", { status: 400 });
         // }
         else if (nextWord.match(/^[ぁ-んー　]+$/))
         {
@@ -87,10 +72,11 @@ serve(
       }
 
     return serveDir(req, {
-      fsRoot: "public",
+      fsRoot: "deno_shiritori/public",
       // push時に変更しないとdeployweb上でエラー
         urlRoot: "",
         showDirListing: true,
         enableCors: true,
-      });
+    });
+    
   });
