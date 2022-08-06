@@ -2,7 +2,8 @@ import { serve } from "https://deno.land/std@0.138.0/http/server.ts";
 
 import { serveDir } from "https://deno.land/std@0.138.0/http/file_server.ts";
 
-const _chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ';//'を','ん' を除く
+const _chars = 'あいうえおかきくけこさしすせそたちつてとなにぬねのはひふへほまみむめもやゆよらりるれろわ';//'ん' を除く
+const _komoji_checker = 'ぁぃぅぇぉっゃゅょゎ';
 let previousWord = [];
 previousWord += _chars.charAt(Math.floor(Math.random() * _chars.length));
 let WordList = [];
@@ -29,6 +30,50 @@ serve(
         nextWord = nextWord.slice(0, -1);
         console.log(nextWord);
       }
+      
+      //単語末尾の小文字を変換
+      else if (nextWord.charAt(nextWord.length - 1) == "ぁ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "あ";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ぃ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "い";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ぅ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "う";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ぇ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "え";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ぉ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "お";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "っ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "つ";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ゃ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "や";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ゅ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "ゆ";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ょ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "よ";
+      }
+      else if (nextWord.charAt(nextWord.length - 1) == "ゎ") {
+        nextWord = nextWord.slice(0, -1);
+        nextWord += "わ";
+      }
+        //ここまで
+
 
         if (nextWord.length > 0 && previousWord.charAt(previousWord.length - 1) !== nextWord.charAt(0) && nextWord != "reset")
         {
@@ -72,7 +117,7 @@ serve(
       }
 
     return serveDir(req, {
-      fsRoot: "public",
+      fsRoot: "deno_shiritori/public",
       // push時に変更しないとdeployweb上でエラー
         urlRoot: "",
         showDirListing: true,

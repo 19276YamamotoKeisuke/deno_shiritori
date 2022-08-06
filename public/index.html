@@ -82,7 +82,7 @@
         document.querySelector("#nextWordSendButton").onclick = async (event) => {
           let nextWord = document.querySelector("#nextWordInput").value;
           if (nextWord.charAt(nextWord.length - 1) === "ん"){
-              nextWord = 'reset';
+               nextWord = 'reset';
               alert('単語の末尾が「ん」になっています。ゲームを終了します。');
               app.words_history.splice(0,app.words_history.length);
             }
@@ -137,7 +137,7 @@ app.words_history.push(previousWord[0]);
 const para = document.querySelector("#previousWord");
 para.innerText = `前の単語：${previousWord}`;
 // localStorage.clear()
-// console.log(WordList)
+console.log(WordList)
 
 };
     </script>
